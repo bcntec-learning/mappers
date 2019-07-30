@@ -6,50 +6,64 @@ import bcntec.training.mappers.mapper.EmployeeFlattenMapper;
 import bcntec.training.mappers.test.AbstractEmployeeFlattenMapperUnitTest;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
-import org.modelmapper.TypeMap;
-import org.modelmapper.convention.MatchingStrategies;
 
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-public class EmployeeFlattenMapperUnitTest extends AbstractEmployeeFlattenMapperUnitTest {
+public class EmployeeFlattenModelMapperUnitTest extends AbstractEmployeeFlattenMapperUnitTest {
     private static ModelMapper modelMapper = new ModelMapper();
 
+    /*
     private static TypeMap<EmployeeFlattenDTO, Employee> typeMap1 =
             modelMapper.createTypeMap(EmployeeFlattenDTO.class, Employee.class);
 
     private static TypeMap<Employee, EmployeeFlattenDTO> typeMap2 =
             modelMapper.createTypeMap(Employee.class, EmployeeFlattenDTO.class);
 
+
+     */
+
     {
         //modelMapper.getConfiguration().setMatchingStrategy()
         /*
         to avoid this ambiguity error you need determine what method is a map property
-        1) The destination property bcntec.training.mappers.entity.Employee.setName() matches multiple source property hierarchies:
+            The destination property bcntec.training.mappers.entity.Employee.setName() matches multiple source property hierarchies:
 	        bcntec.training.mappers.dto.EmployeeFlattenDTO.getEmployeeName()
 	        bcntec.training.mappers.dto.EmployeeFlattenDTO.getDivisionName()
 
-         */
-        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
+         1) adding mapping
+         2) renaming EmployeeName -> Name and EmployeeId -> Id
+          */
+
+        //modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
 
         modelMapper.getConfiguration().setAmbiguityIgnored(true);
+
+        /*
+
         typeMap1.addMappings(mapper -> {
             mapper.map(EmployeeFlattenDTO::getEmployeeId, Employee::setId);
             mapper.map(EmployeeFlattenDTO::getEmployeeName, Employee::setName);
         });
+
         typeMap2.addMappings(mapper -> {
             mapper.map(Employee::getId, EmployeeFlattenDTO::setEmployeeId);
             mapper.map(Employee::getName, EmployeeFlattenDTO::setEmployeeName);
         });
 
-        PropertyMap<Employee, EmployeeFlattenDTO> employeeMap = new PropertyMap<Employee, EmployeeFlattenDTO>() {
+         */
+
+        PropertyMap<Employee, EmployeeFlattenDTO> employeeFlattenMap = new PropertyMap<Employee, EmployeeFlattenDTO>() {
             protected void configure() {
                 map().setDivisionId(source.getDivision().getId());
                 map().setDivisionName(source.getDivision().getName());
             }
         };
+
+        modelMapper.addMappings(employeeFlattenMap);
     }
+
     @Override
     public EmployeeFlattenMapper getMapper() {
         return new EmployeeFlattenMapper() {

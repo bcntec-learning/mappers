@@ -5,7 +5,7 @@ import bcntec.training.mappers.mapstuct.EmployeeMapstruct;
 import bcntec.training.mappers.test.AbstractEmployeeMapperUnitTest;
 import lombok.Getter;
 
-public class EmployeeMapperUnitTest extends AbstractEmployeeMapperUnitTest {
+public class EmployeeMapstuctUnitTest extends AbstractEmployeeMapperUnitTest {
 
     @Getter
     EmployeeMapper mapper = EmployeeMapstruct.INSTANCE;

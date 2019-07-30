@@ -1,12 +1,9 @@
 package bcntec.training.mappers.test;
 
-import bcntec.training.mappers.dto.DivisionDTO;
-import bcntec.training.mappers.dto.EmployeeDTO;
 import bcntec.training.mappers.dto.EmployeeFlattenDTO;
 import bcntec.training.mappers.entity.Division;
 import bcntec.training.mappers.entity.Employee;
 import bcntec.training.mappers.mapper.EmployeeFlattenMapper;
-import bcntec.training.mappers.mapper.EmployeeMapper;
 import org.junit.Test;
 
 import java.text.ParseException;
@@ -48,7 +45,7 @@ public abstract class AbstractEmployeeFlattenMapperUnitTest {
     }
 
     @Test
-    public void givenEmployeeDTOwithNestedMappingToEmployee_whenMaps_thenCorrect() {
+    public void givenEmployeeDTOMappingToEmployee_whenMaps_thenCorrect() {
         EmployeeFlattenDTO dto = new EmployeeFlattenDTO();
         dto.setDivisionId(1);
         dto.setDivisionName("Division1");
@@ -60,7 +57,7 @@ public abstract class AbstractEmployeeFlattenMapperUnitTest {
     }
 
     @Test
-    public void givenEmployeeWithNestedMappingToEmployeeDTO_whenMaps_thenCorrect() {
+    public void givenEmployeeToEmployeeDTO_whenMaps_thenCorrect() {
         Employee entity = new Employee();
         entity.setDivision(new Division(1, "Division1"));
 

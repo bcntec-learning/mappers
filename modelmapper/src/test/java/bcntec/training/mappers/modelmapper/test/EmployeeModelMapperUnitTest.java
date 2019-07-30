@@ -10,7 +10,7 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-public class EmployeeMapperUnitTest extends AbstractEmployeeMapperUnitTest {
+public class EmployeeModelMapperUnitTest extends AbstractEmployeeMapperUnitTest {
     private static ModelMapper modelMapper = new ModelMapper();
 
     @Override

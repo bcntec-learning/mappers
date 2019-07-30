@@ -7,6 +7,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContext.xml")
-public abstract class SimpleSourceDestinationMapperIntegrationTest extends SpringSourceDestinationMapperIntegrationTest {
+public abstract class SimpleSourceDestinationMapstuctIntegrationTest extends SpringSourceDestinationMapperIntegrationTest {
 
 }

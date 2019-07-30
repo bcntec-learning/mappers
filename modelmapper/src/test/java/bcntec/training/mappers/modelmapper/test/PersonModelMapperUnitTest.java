@@ -10,7 +10,7 @@ import org.modelmapper.TypeMap;
 
 import java.util.UUID;
 
-public class PersonMapperUnitTest extends AbstractPersonMapperUnitTest {
+public class PersonModelMapperUnitTest extends AbstractPersonMapperUnitTest {
 
     private static ModelMapper modelMapper = new ModelMapper();
     private static TypeMap<Person, PersonDTO> typeMap =
