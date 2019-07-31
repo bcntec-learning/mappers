@@ -1,7 +1,7 @@
 package bcntec.training.mappers.dto;
 
 public class PersonDTO {
-    
+
     private String id;
     private String name;
 

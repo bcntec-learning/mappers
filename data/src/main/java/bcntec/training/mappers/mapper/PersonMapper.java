@@ -6,6 +6,6 @@ import bcntec.training.mappers.entity.Person;
 
 @FunctionalInterface
 public interface PersonMapper {
-    
+
     PersonDTO personToPersonDTO(Person person);
 }

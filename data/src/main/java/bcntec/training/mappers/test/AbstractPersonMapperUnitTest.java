@@ -10,10 +10,11 @@ import static org.junit.Assert.*;
 public abstract class AbstractPersonMapperUnitTest {
 
     public abstract PersonMapper getMapper();
+
     @Test
     public void givenPersonEntitytoPersonWithExpression_whenMaps_thenCorrect() {
-        
-        Person entity  = new Person();
+
+        Person entity = new Person();
         entity.setName("Micheal");
 
         PersonDTO personDto = getMapper().personToPersonDTO(entity);

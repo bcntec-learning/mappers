@@ -8,8 +8,10 @@ import org.junit.Test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -105,11 +107,10 @@ public abstract class AbstractEmployeeFlattenMapperUnitTest {
     @Test
     public void givenEmployeeWithStartDateMappingToEmployeeDTO_whenMaps_thenCorrect() throws ParseException {
         Employee entity = new Employee();
-        entity.setStartDt(new Date());
+        entity.setStartDt(LocalDateTime.now());
 
         EmployeeFlattenDTO dto = getMapper().employeeToEmployeeDTO(entity);
-        SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT);
-        assertEquals(format.parse(dto.getEmployeeStartDt()).toString(), entity.getStartDt().toString());
+        assertEquals(dto.getEmployeeStartDt(), DateTimeFormatter.ofPattern(DATE_FORMAT).format(entity.getStartDt()));
     }
 
     @Test
@@ -118,7 +119,6 @@ public abstract class AbstractEmployeeFlattenMapperUnitTest {
         dto.setEmployeeStartDt("01-04-2016 01:00:00");
 
         Employee entity = getMapper().employeeDTOtoEmployee(dto);
-        SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT);
-        assertEquals(format.parse(dto.getEmployeeStartDt()).toString(), entity.getStartDt().toString());
+        assertEquals(dto.getEmployeeStartDt(), DateTimeFormatter.ofPattern(DATE_FORMAT).format(entity.getStartDt()));
     }
 }

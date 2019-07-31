@@ -14,5 +14,4 @@ public class EmployeeFlattenDTO {
     private String employeeStartDt;
 
 
-
 }

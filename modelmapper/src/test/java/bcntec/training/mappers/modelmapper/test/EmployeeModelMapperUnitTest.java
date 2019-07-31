@@ -3,6 +3,7 @@ package bcntec.training.mappers.modelmapper.test;
 import bcntec.training.mappers.dto.EmployeeDTO;
 import bcntec.training.mappers.entity.Employee;
 import bcntec.training.mappers.mapper.EmployeeMapper;
+import bcntec.training.mappers.modelmapper.ModelMapperUtils;
 import bcntec.training.mappers.test.AbstractEmployeeMapperUnitTest;
 import org.modelmapper.ModelMapper;
 
@@ -12,7 +13,11 @@ import static java.util.stream.Collectors.toList;
 
 public class EmployeeModelMapperUnitTest extends AbstractEmployeeMapperUnitTest {
     private static ModelMapper modelMapper = new ModelMapper();
+    static {
 
+        ModelMapperUtils.localDateTime2String(modelMapper, "dd-MM-yyyy HH:mm:ss");
+
+    }
     @Override
     public EmployeeMapper getMapper() {
         return new EmployeeMapper() {

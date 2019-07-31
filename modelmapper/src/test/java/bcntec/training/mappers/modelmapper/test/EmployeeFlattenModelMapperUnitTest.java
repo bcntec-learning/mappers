@@ -3,10 +3,15 @@ package bcntec.training.mappers.modelmapper.test;
 import bcntec.training.mappers.dto.EmployeeFlattenDTO;
 import bcntec.training.mappers.entity.Employee;
 import bcntec.training.mappers.mapper.EmployeeFlattenMapper;
+import bcntec.training.mappers.modelmapper.ModelMapperUtils;
 import bcntec.training.mappers.test.AbstractEmployeeFlattenMapperUnitTest;
+import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
+import org.modelmapper.Provider;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -24,7 +29,7 @@ public class EmployeeFlattenModelMapperUnitTest extends AbstractEmployeeFlattenM
 
      */
 
-    {
+    static {
         //modelMapper.getConfiguration().setMatchingStrategy()
         /*
         to avoid this ambiguity error you need determine what method is a map property
@@ -61,7 +66,14 @@ public class EmployeeFlattenModelMapperUnitTest extends AbstractEmployeeFlattenM
             }
         };
 
+
         modelMapper.addMappings(employeeFlattenMap);
+
+
+        //common string2localdate mapper
+
+        //ModelMapperUtils.localDateTime2String(modelMapper, "dd-MM-yyyy HH:mm:ss");
+
     }
 
     @Override

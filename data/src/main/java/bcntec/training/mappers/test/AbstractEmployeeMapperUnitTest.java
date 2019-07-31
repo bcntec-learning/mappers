@@ -7,10 +7,9 @@ import bcntec.training.mappers.entity.Employee;
 import bcntec.training.mappers.mapper.EmployeeMapper;
 import org.junit.Test;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -18,6 +17,7 @@ import static org.junit.Assert.assertEquals;
 public abstract class AbstractEmployeeMapperUnitTest {
 
     private static final String DATE_FORMAT = "dd-MM-yyyy HH:mm:ss";
+
     public abstract EmployeeMapper getMapper();
 
     @Test
@@ -47,7 +47,7 @@ public abstract class AbstractEmployeeMapperUnitTest {
     @Test
     public void givenEmployeeDTOwithNestedMappingToEmployee_whenMaps_thenCorrect() {
         EmployeeDTO dto = new EmployeeDTO();
-        dto.setDivision(new DivisionDTO(1,"Division1"));
+        dto.setDivision(new DivisionDTO(1, "Division1"));
 
         Employee entity = getMapper().employeeDTOtoEmployee(dto);
 
@@ -101,22 +101,21 @@ public abstract class AbstractEmployeeMapperUnitTest {
     }
 
     @Test
-    public void givenEmployeeWithStartDateMappingToEmployeeDTO_whenMaps_thenCorrect() throws ParseException {
+    public void givenEmployeeWithStartDateMappingToEmployeeDTO_whenMaps_thenCorrect() {
         Employee entity = new Employee();
-        entity.setStartDt(new Date());
+        entity.setStartDt(LocalDateTime.now());
 
         EmployeeDTO dto = getMapper().employeeToEmployeeDTO(entity);
-        SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT);
-        assertEquals(format.parse(dto.getStartDt()).toString(), entity.getStartDt().toString());
+
+        assertEquals(DateTimeFormatter.ofPattern(DATE_FORMAT).format(entity.getStartDt()), dto.getStartDt());
     }
 
     @Test
-    public void givenEmployeeDTOWithStartDateMappingToEmployee_whenMaps_thenCorrect() throws ParseException {
+    public void givenEmployeeDTOWithStartDateMappingToEmployee_whenMaps_thenCorrect() {
         EmployeeDTO dto = new EmployeeDTO();
         dto.setStartDt("01-04-2016 01:00:00");
 
         Employee entity = getMapper().employeeDTOtoEmployee(dto);
-        SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT);
-        assertEquals(format.parse(dto.getStartDt()).toString(), entity.getStartDt().toString());
+        assertEquals(DateTimeFormatter.ofPattern(DATE_FORMAT).format(entity.getStartDt()), dto.getStartDt());
     }
 }
